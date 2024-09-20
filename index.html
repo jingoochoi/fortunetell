@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tarot tell</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <div class="taro" style="text-align: center;top: 50%;position: absolute;left: 50%;transform: translate(-50%,-50%);background-color: lightgreen;padding: 30px;">
+        <div class="card"></div><br>
+        <div class="sult" style="color: red;"></div>
+    </div>
+    <script>
+        fetch('data.json').then(a=>a.json()).then(b=>{
+            let ran1=Math.ceil(Math.random()*b.length)-1
+            let ran2=Math.ceil(Math.random()*b.length)-1
+            if (ran1!=ran2) {
+                $('.card').html(`${b[ran1].name} : ${b[ran1].mean}<br>${b[ran2].name} : ${b[ran2].mean}`)
+                $('.sult').text(`${b[ran1].mean}->${b[ran2].mean}`)
+            }else{
+                $('.card').html(`${b[ran1].name} : ${b[ran1].mean}<br>${b[ran1-1].name} : ${b[ran1-1].mean}`)
+                $('.sult').text(`${b[ran1].mean}->${b[ran1-1].mean}`)
+            }
+        })
+    </script>
+</body>
+</html>
